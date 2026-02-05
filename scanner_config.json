@@ -1,0 +1,209 @@
+{
+  "version": "0.1",
+  "update_url": "https://raw.githubusercontent.com/ronaldbradford/aiapp-scanner-config/main/config.json",
+  "applications": [
+    {
+      "name": "Claude.app",
+      "vendor": "Anthropic",
+      "type": "gui",
+      "bundle_id": "com.anthropic.claude"
+    },
+    {
+      "name": "ChatGPT.app",
+      "vendor": "OpenAI",
+      "type": "gui",
+      "bundle_id": "com.openai.chat"
+    },
+    {
+      "name": "Cursor.app",
+      "vendor": "Cursor",
+      "type": "gui",
+      "bundle_id": "com.todesktop.230313mzl4w4u92"
+    },
+    {
+      "name": "Cody.app",
+      "vendor": "Sourcegraph",
+      "type": "gui",
+      "bundle_id": "com.sourcegraph.cody"
+    },
+    {
+      "name": "Windsurf.app",
+      "vendor": "Codeium",
+      "type": "gui",
+      "bundle_id": "com.codeium.windsurf"
+    },
+    {
+      "name": "Copilot.app",
+      "vendor": "GitHub",
+      "type": "gui",
+      "bundle_id": "com.github.copilot"
+    },
+    {
+      "name": "Pieces.app",
+      "vendor": "Pieces",
+      "type": "gui",
+      "bundle_id": "com.pieces.os"
+    },
+    {
+      "name": "Warp.app",
+      "vendor": "Warp",
+      "type": "gui",
+      "bundle_id": "dev.warp.Warp-Stable",
+      "note": "Terminal with AI features"
+    },
+    {
+      "name": "Raycast.app",
+      "vendor": "Raycast",
+      "type": "gui",
+      "bundle_id": "com.raycast.macos",
+      "note": "Launcher with AI assistant"
+    },
+    {
+      "name": "Visual Studio Code.app",
+      "vendor": "Microsoft",
+      "type": "gui",
+      "bundle_id": "com.microsoft.VSCode",
+      "note": "Editor; AI extensions in ~/.vscode/extensions"
+    }
+  ],
+  "vscode_extensions": [
+    {
+      "id": "roocode.roocode",
+      "name": "Roo Code",
+      "vendor": "Roo"
+    }
+  ],
+  "cli_tools": [
+    {
+      "name": "claude",
+      "vendor": "Anthropic",
+      "version_cmd": [
+        "claude",
+        "--version"
+      ],
+      "config_paths": [
+        "~/.config/claude",
+        "~/.claude"
+      ]
+    },
+    {
+      "name": "aichat",
+      "vendor": "sigoden",
+      "version_cmd": [
+        "aichat",
+        "--version"
+      ],
+      "config_paths": [
+        "~/.config/aichat"
+      ]
+    },
+    {
+      "name": "mods",
+      "vendor": "Charm",
+      "version_cmd": [
+        "mods",
+        "--version"
+      ],
+      "config_paths": [
+        "~/.config/mods"
+      ]
+    },
+    {
+      "name": "fabric",
+      "vendor": "danielmiessler",
+      "version_cmd": [
+        "fabric",
+        "--version"
+      ],
+      "config_paths": [
+        "~/.config/fabric"
+      ]
+    },
+    {
+      "name": "sgpt",
+      "vendor": "TheR1D",
+      "version_cmd": [
+        "sgpt",
+        "--version"
+      ],
+      "config_paths": [
+        "~/.config/shell_gpt"
+      ]
+    },
+    {
+      "name": "chatgpt",
+      "vendor": "OpenAI",
+      "version_cmd": [
+        "chatgpt",
+        "--version"
+      ],
+      "config_paths": [
+        "~/.config/chatgpt"
+      ]
+    },
+    {
+      "name": "copilot",
+      "vendor": "GitHub",
+      "version_cmd": [
+        "copilot",
+        "--version"
+      ],
+      "config_paths": [
+        "~/.config/github-copilot"
+      ]
+    },
+    {
+      "name": "llm",
+      "vendor": "Simon Willison",
+      "version_cmd": [
+        "llm",
+        "--version"
+      ],
+      "config_paths": [
+        "~/.config/io.datasette.llm"
+      ]
+    }
+  ],
+  "config_locations": [
+    {
+      "name": "OpenAI",
+      "paths": [
+        "~/.openai",
+        "~/.config/openai"
+      ]
+    },
+    {
+      "name": "Anthropic",
+      "paths": [
+        "~/.anthropic",
+        "~/.config/anthropic"
+      ]
+    },
+    {
+      "name": "Google AI",
+      "paths": [
+        "~/.google-ai",
+        "~/.config/google-ai"
+      ]
+    },
+    {
+      "name": "Hugging Face",
+      "paths": [
+        "~/.huggingface",
+        "~/.cache/huggingface"
+      ]
+    },
+    {
+      "name": "Ollama",
+      "paths": [
+        "~/.ollama"
+      ]
+    },
+    {
+      "name": "LM Studio",
+      "paths": [
+        "~/Library/Application Support/LM Studio"
+      ]
+    }
+  ]
+}
