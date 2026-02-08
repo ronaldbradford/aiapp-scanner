@@ -137,12 +137,36 @@ class ScannerConfig:
                     "type": "gui",
                     "bundle_id": "com.microsoft.VSCode",
                     "note": "Editor; scan for AI extensions in ~/.vscode/extensions"
+                },
+                {
+                    "name": "LM Studio.app",
+                    "vendor": "LM Studio",
+                    "type": "gui",
+                    "bundle_id": "ai.elementlabs.lmstudio",
+                    "note": "Local LLM chat and API"
+                },
+                {
+                    "name": "Goose.app",
+                    "vendor": "Block",
+                    "type": "gui",
+                    "bundle_id": "com.block.goose",
+                    "note": "Open source AI agent (desktop)"
                 }
             ],
             "vscode_extensions": [
                 {
+                    "id": "kilocode.Kilo-Code",
+                    "name": "Kilo Code",
+                    "vendor": "Kilo"
+                },
+                {
                     "id": "roocode.roocode",
                     "name": "Roo Code",
+                    "vendor": "Roo"
+                },
+                {
+                    "id": "rooveterinaryinc.roo-cline",
+                    "name": "Roo Cline",
                     "vendor": "Roo"
                 }
             ],
@@ -178,6 +202,23 @@ class ScannerConfig:
                     "version_cmd": ["github-copilot-cli", "--version"],
                     "config_paths": [
                         "~/.config/github-copilot"
+                    ]
+                },
+                {
+                    "name": "ollama",
+                    "vendor": "Ollama",
+                    "version_cmd": ["ollama", "--version"],
+                    "config_paths": [
+                        "~/.ollama"
+                    ]
+                },
+                {
+                    "name": "goose",
+                    "vendor": "Block",
+                    "version_cmd": ["goose", "--version"],
+                    "config_paths": [
+                        "~/Library/Application Support/Goose",
+                        "~/.config/goose"
                     ]
                 }
             ],
@@ -458,8 +499,9 @@ class VSCodeExtensionScanner:
                         ext_id = ext_cfg.get('id') or ext_cfg.get('name', '')
                         if not ext_id or '.' not in ext_id:
                             continue
-                        # Extension folders are publisher.name-version
-                        if entry.startswith(ext_id + '-'):
+                        # Extension folders are publisher.name-version (often lowercase on disk)
+                        prefix = ext_id + '-'
+                        if entry.startswith(prefix) or entry.lower().startswith(prefix.lower()):
                             info = self._read_extension_info(
                                 os.path.join(ext_dir, entry),
                                 ext_cfg,
@@ -494,10 +536,13 @@ class VSCodeExtensionScanner:
         try:
             with open(pkg_path, 'r', encoding='utf-8') as f:
                 pkg = json.load(f)
+            display_name = pkg.get('displayName') or ''
+            if '%' in display_name or not display_name:
+                display_name = ext_cfg.get('name') or pkg.get('name', '') or ext_cfg.get('id', '')
             return {
                 'type': 'vscode_extension',
                 'extension_id': ext_cfg.get('id', ''),
-                'name': pkg.get('displayName') or ext_cfg.get('name', pkg.get('name', '')),
+                'name': display_name,
                 'vendor': ext_cfg.get('vendor', pkg.get('publisher', '')),
                 'version': pkg.get('version', 'unknown'),
                 'path': ext_path,
@@ -538,7 +583,7 @@ class AIAppScanner:
         results = {
             'scan_metadata': {
                 'timestamp': datetime.now().isoformat(),
-                'scanner_version': '0.1.0',
+                'scanner_version': '0.2.0',
                 'hostname': _anonymize_hostname(raw_hostname),
                 'os_version': platform.mac_ver()[0],
                 'config_version': self.config.config.get('version', 'unknown'),

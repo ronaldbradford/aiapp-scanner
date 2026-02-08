@@ -262,6 +262,46 @@ The scanner:
 - Does NOT transmit any data (local scanning only)
 - Limits directory listings to 20 files for privacy
 
+## Compliance Report
+
+A separate program **compliance_report.py** (or `aiapp-compliance-report` when installed) compares scan results against an organization **policy file**: a JSON allowlist of accepted applications, CLI tools, and VSCode extensions, each with supported versions and an optional `supported_until` date. It runs the scanner and produces an **HTML report** with color-coded rows:
+
+- **Green**: Accepted product and version (in allowlist).
+- **Yellow**: Accepted product but installed version not in the allowlist.
+- **Red**: Product not in the allowlist.
+
+**Policy file format** (see `policy_example.json`):
+
+```json
+{
+  "applications": [
+    {
+      "name": "Claude.app",
+      "bundle_id": "com.anthropic.claude",
+      "supported_versions": [
+        { "version": "1.1.1520", "supported_until": "2025-06-01" }
+      ]
+    }
+  ],
+  "cli_tools": [
+    { "name": "claude", "supported_versions": [{ "version": "2.1.19 (Claude Code)", "supported_until": "2025-06-01" }] }
+  ],
+  "vscode_extensions": [
+    { "id": "roocode.roocode", "supported_versions": [{ "version": "1.0.0", "supported_until": "2025-06-01" }] }
+  ]
+}
+```
+
+**Run the report:**
+
+```bash
+python3 compliance_report.py policy_example.json -o compliance_report.html
+# Or, if installed:
+aiapp-compliance-report policy.json --output report.html
+```
+
+Optional: `--scanner-config path/to/scanner_config.json` to use a specific scanner config.
+
 ## Integration with Reporting Systems
 
 The JSON output is designed for easy integration. Example with curl:

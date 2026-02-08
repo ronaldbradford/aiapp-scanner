@@ -46,6 +46,7 @@ htmlcov/
 
 # Scanner output
 scan_results.json
+compliance_report.html
 *.log
 
 # Config backups

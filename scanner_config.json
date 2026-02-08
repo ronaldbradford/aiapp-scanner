@@ -64,12 +64,36 @@
       "type": "gui",
       "bundle_id": "com.microsoft.VSCode",
       "note": "Editor; AI extensions in ~/.vscode/extensions"
+    },
+    {
+      "name": "LM Studio.app",
+      "vendor": "LM Studio",
+      "type": "gui",
+      "bundle_id": "ai.elementlabs.lmstudio",
+      "note": "Local LLM chat and API"
+    },
+    {
+      "name": "Goose.app",
+      "vendor": "Block",
+      "type": "gui",
+      "bundle_id": "com.block.goose",
+      "note": "Open source AI agent (desktop)"
     }
   ],
   "vscode_extensions": [
     {
+      "id": "kilocode.Kilo-Code",
+      "name": "Kilo Code",
+      "vendor": "Kilo"
+    },
+    {
       "id": "roocode.roocode",
       "name": "Roo Code",
+      "vendor": "Roo"
+    },
+    {
+      "id": "rooveterinaryinc.roo-cline",
+      "name": "Roo Cline",
       "vendor": "Roo"
     }
   ],
@@ -161,6 +185,29 @@
       ],
       "config_paths": [
         "~/.config/io.datasette.llm"
+      ]
+    },
+    {
+      "name": "ollama",
+      "vendor": "Ollama",
+      "version_cmd": [
+        "ollama",
+        "--version"
+      ],
+      "config_paths": [
+        "~/.ollama"
+      ]
+    },
+    {
+      "name": "goose",
+      "vendor": "Block",
+      "version_cmd": [
+        "goose",
+        "--version"
+      ],
+      "config_paths": [
+        "~/Library/Application Support/Goose",
+        "~/.config/goose"
       ]
     }
   ],
