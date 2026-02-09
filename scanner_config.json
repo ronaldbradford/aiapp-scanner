@@ -78,6 +78,48 @@
       "type": "gui",
       "bundle_id": "com.block.goose",
       "note": "Open source AI agent (desktop)"
+    },
+    {
+      "name": "Void.app",
+      "vendor": "Void",
+      "type": "gui",
+      "bundle_id": "com.voideditor.code",
+      "note": "Open source AI code editor (VS Code fork)"
+    },
+    {
+      "name": "Zed.app",
+      "vendor": "Zed",
+      "type": "gui",
+      "bundle_id": "dev.zed.Zed",
+      "note": "Multiplayer code editor with AI"
+    },
+    {
+      "name": "Replit.app",
+      "vendor": "Replit",
+      "type": "gui",
+      "bundle_id": "com.electron.replit",
+      "note": "Development platform with AI agent"
+    },
+    {
+      "name": "Bolt.app",
+      "vendor": "BoltAI",
+      "type": "gui",
+      "bundle_id": "com.boltai.app",
+      "note": "Native AI client for Mac (300+ models)"
+    },
+    {
+      "name": "Tabnine.app",
+      "vendor": "Tabnine",
+      "type": "gui",
+      "bundle_id": "com.tabnine.Tabnine",
+      "note": "AI code completion and chat"
+    },
+    {
+      "name": "Otter.app",
+      "vendor": "Otter",
+      "type": "gui",
+      "bundle_id": "com.otter.otter",
+      "note": "AI coding assistant"
     }
   ],
   "vscode_extensions": [

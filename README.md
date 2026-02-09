@@ -72,13 +72,7 @@ aiapp-scanner --update-config
 aiapp-scanner --config /path/to/custom_config.json
 ```
 
-### Create Default Configuration
-
-```bash
-aiapp-scanner --create-default-config
-```
-
-This creates a configuration file at `~/.config/aiapp-scanner/config.json`
+A configuration file is required. Use the included `scanner_config.json`, or copy it to `~/.config/aiapp-scanner/config.json`, or pass `--config PATH`.
 
 ### Update Configuration from Custom URL
 

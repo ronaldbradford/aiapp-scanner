@@ -325,9 +325,8 @@ shasum -a 256 aiapp-scanner-0.2.0.tar.gz
 
 ### Adding New Configuration Fields
 
-1. Add field to config JSON schema
-2. Update `_create_default_config()` method
-3. Use field in relevant scanner class
+1. Add field to config JSON schema (e.g. in scanner_config.json)
+2. Use field in relevant scanner class
 4. Document field in README
 5. Update config version number
 

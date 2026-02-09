@@ -40,12 +40,8 @@ def run_command(cmd, description):
 def main():
     tests = [
         {
-            'cmd': ['python3', 'aiapp_scanner.py', '--create-default-config'],
-            'description': 'Create default configuration'
-        },
-        {
-            'cmd': ['python3', 'aiapp_scanner.py', '--pretty'],
-            'description': 'Basic scan with pretty output'
+            'cmd': ['python3', 'aiapp_scanner.py', '--config', 'scanner_config.json', '--pretty'],
+            'description': 'Basic scan with default config file'
         },
         {
             'cmd': ['python3', 'aiapp_scanner.py', '--output', '/tmp/scan_results.json'],

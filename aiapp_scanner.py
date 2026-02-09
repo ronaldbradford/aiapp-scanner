@@ -83,162 +83,25 @@ class ScannerConfig:
         return os.path.expanduser('~/.config/aiapp-scanner/config.json')
 
     def _load_config(self) -> Dict[str, Any]:
-        """Load configuration from JSON file"""
+        """Load configuration from JSON file. Config file must exist."""
         if not os.path.exists(self.config_path):
-            # Create default config
-            return self._create_default_config()
-
+            _possible = [
+                'scanner_config.json',
+                os.path.expanduser('~/.config/aiapp-scanner/config.json'),
+                '/usr/local/etc/aiapp-scanner/config.json'
+            ]
+            print(
+                f"Configuration file required but not found: {self.config_path}\n"
+                f"Use --config PATH or copy scanner_config.json to one of:\n  " + "\n  ".join(_possible),
+                file=sys.stderr
+            )
+            sys.exit(1)
         try:
             with open(self.config_path, 'r') as f:
                 return json.load(f)
         except json.JSONDecodeError as e:
             print(f"Error parsing config file: {e}", file=sys.stderr)
-            return self._create_default_config()
-
-    def _create_default_config(self) -> Dict[str, Any]:
-        """Create default configuration"""
-        return {
-            "version": "1.0",
-            "update_url": "https://example.com/scanner-config.json",
-            "applications": [
-                {
-                    "name": "Claude.app",
-                    "vendor": "Anthropic",
-                    "type": "gui",
-                    "bundle_id": "com.anthropic.claude"
-                },
-                {
-                    "name": "ChatGPT.app",
-                    "vendor": "OpenAI",
-                    "type": "gui",
-                    "bundle_id": "com.openai.chat"
-                },
-                {
-                    "name": "Cursor.app",
-                    "vendor": "Cursor",
-                    "type": "gui",
-                    "bundle_id": "com.todesktop.230313mzl4w4u92"
-                },
-                {
-                    "name": "Cody.app",
-                    "vendor": "Sourcegraph",
-                    "type": "gui",
-                    "bundle_id": "com.sourcegraph.cody"
-                },
-                {
-                    "name": "GitHub Copilot.app",
-                    "vendor": "GitHub",
-                    "type": "gui",
-                    "bundle_id": "com.github.copilot"
-                },
-                {
-                    "name": "Visual Studio Code.app",
-                    "vendor": "Microsoft",
-                    "type": "gui",
-                    "bundle_id": "com.microsoft.VSCode",
-                    "note": "Editor; scan for AI extensions in ~/.vscode/extensions"
-                },
-                {
-                    "name": "LM Studio.app",
-                    "vendor": "LM Studio",
-                    "type": "gui",
-                    "bundle_id": "ai.elementlabs.lmstudio",
-                    "note": "Local LLM chat and API"
-                },
-                {
-                    "name": "Goose.app",
-                    "vendor": "Block",
-                    "type": "gui",
-                    "bundle_id": "com.block.goose",
-                    "note": "Open source AI agent (desktop)"
-                }
-            ],
-            "vscode_extensions": [
-                {
-                    "id": "kilocode.Kilo-Code",
-                    "name": "Kilo Code",
-                    "vendor": "Kilo"
-                },
-                {
-                    "id": "roocode.roocode",
-                    "name": "Roo Code",
-                    "vendor": "Roo"
-                },
-                {
-                    "id": "rooveterinaryinc.roo-cline",
-                    "name": "Roo Cline",
-                    "vendor": "Roo"
-                }
-            ],
-            "cli_tools": [
-                {
-                    "name": "claude",
-                    "vendor": "Anthropic",
-                    "version_cmd": ["claude", "--version"],
-                    "config_paths": [
-                        "~/.config/claude",
-                        "~/.claude"
-                    ]
-                },
-                {
-                    "name": "aichat",
-                    "vendor": "sigoden",
-                    "version_cmd": ["aichat", "--version"],
-                    "config_paths": [
-                        "~/.config/aichat"
-                    ]
-                },
-                {
-                    "name": "gemini",
-                    "vendor": "Google",
-                    "version_cmd": ["gemini", "--version"],
-                    "config_paths": [
-                        "~/.config/gemini"
-                    ]
-                },
-                {
-                    "name": "github-copilot-cli",
-                    "vendor": "GitHub",
-                    "version_cmd": ["github-copilot-cli", "--version"],
-                    "config_paths": [
-                        "~/.config/github-copilot"
-                    ]
-                },
-                {
-                    "name": "ollama",
-                    "vendor": "Ollama",
-                    "version_cmd": ["ollama", "--version"],
-                    "config_paths": [
-                        "~/.ollama"
-                    ]
-                },
-                {
-                    "name": "goose",
-                    "vendor": "Block",
-                    "version_cmd": ["goose", "--version"],
-                    "config_paths": [
-                        "~/Library/Application Support/Goose",
-                        "~/.config/goose"
-                    ]
-                }
-            ],
-            "config_locations": [
-                {
-                    "name": "OpenAI",
-                    "paths": [
-                        "~/.openai",
-                        "~/.config/openai"
-                    ]
-                },
-                {
-                    "name": "Anthropic",
-                    "paths": [
-                        "~/.anthropic",
-                        "~/.config/anthropic"
-                    ]
-                }
-            ]
-        }
+            sys.exit(1)
 
     def save_config(self):
         """Save current configuration to file"""
@@ -639,11 +502,6 @@ def main():
         default=None
     )
     parser.add_argument(
-        '--create-default-config',
-        help='Create default configuration file and exit',
-        action='store_true'
-    )
-    parser.add_argument(
         '--pretty',
         help='Pretty-print JSON output',
         action='store_true'
@@ -652,11 +510,6 @@ def main():
     args = parser.parse_args()
 
     scanner = AIAppScanner(args.config)
-
-    if args.create_default_config:
-        scanner.config.save_config()
-        print(f"Default configuration created at: {scanner.config.config_path}")
-        return 0
 
     if args.update_config:
         if not scanner.update_config(args.update_url):

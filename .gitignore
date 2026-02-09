@@ -1,5 +1,7 @@
 # aiapp-scanner
 scan-results.json
+*.tar.gz
+
 # Python
 __pycache__/
 *.py[cod]

@@ -37,9 +37,6 @@ lint:
 	flake8 aiapp_scanner.py test_scanner.py --max-line-length=100
 
 # Development helpers
-create-config:
-	python aiapp_scanner.py --create-default-config
-
 scan-to-file:
 	python aiapp_scanner.py --output scan_results.json --pretty
 	@echo "Results written to scan_results.json"

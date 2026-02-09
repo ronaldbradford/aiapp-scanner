@@ -61,10 +61,10 @@ aiapp-scanner --update-config --update-url https://your-url.com/config.json
 
 1. Install via Homebrew (see above)
 
-2. Create your custom config:
+2. Use a config file (required). Either use the included one or copy it:
 ```bash
 mkdir -p ~/.config/aiapp-scanner
-aiapp-scanner --create-default-config
+cp scanner_config.json ~/.config/aiapp-scanner/config.json
 ```
 
 3. Edit the config if needed:

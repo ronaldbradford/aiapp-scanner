@@ -36,11 +36,8 @@ A complete, production-ready macOS scanner for detecting AI applications, CLI to
 ## Quick Test
 
 ```bash
-# Test the scanner works
-python3 aiapp_scanner.py --pretty
-
-# Create default config
-python3 aiapp_scanner.py --create-default-config
+# Test the scanner (config file required)
+python3 aiapp_scanner.py --config scanner_config.json --pretty
 
 # Run full test suite
 python3 test_scanner.py
